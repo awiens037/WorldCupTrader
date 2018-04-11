@@ -1,0 +1,128 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>World Cup Trader</title>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        body {
+            background: url(./images/background.png);
+            background-size: cover;
+            color: white;
+
+        }
+
+        h1 {
+            margin-bottom: -10px;
+        }
+
+        @font-face {
+            font-family: dusha_plusregular;
+            src: url(./fonts/dusha_plusregular.ttf);
+
+        }
+
+        header {
+            display: flex;
+        }
+
+        .title {
+            font-family: "dusha_plusregular";
+            color: white;
+            font-size: 15px;
+            margin-left: 20px;
+        }
+
+
+
+.login{
+    float: right;
+    width:25%;
+    height: 300px;
+    margin-right:50px; 
+}
+form{
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+
+.buttons{
+    display: flex;
+    
+}
+button {
+    background-color:#FCF5be;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0 5px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+    </style>
+
+    <header>
+        <img style="height:100px; width:auto; margin-top:0;" src="./images/logo.jpg">
+        <div class="title">
+            <h1>2018 World Cup Trader</h1>
+            <p>14 June - 15 July</p>
+        </div>
+    </header>
+    
+    <div class="glider">
+
+    </div>
+    <div class="login">
+
+            <form action="/action_page.php">              
+                  <label for="uname"><b>E-Mail</b></label>
+                  <input type="text" placeholder="Enter your E-mail" name="uname" required>
+              
+                  <label for="psw"><b>Screen Name</b></label>
+                  <input type="password" placeholder="Enter Screen Name" name="psw" required>
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="psw" required>
+                      
+                  <div class="buttons">
+                  <button type="submit">create account</button>
+                  <button type="submit">Login</button>
+                    </div>
+
+            
+              </form>
+    </div>
+    
+</body>
+
+</html>

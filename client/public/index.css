@@ -1,0 +1,14 @@
+
+
+ body {
+  background: url('./images/background2.jpg');
+  background-size: cover;
+  color: white;
+
+} 
+
+ @font-face {
+  font-family: 'dusha_plusregular';
+  src: url('./fonts/dusha_plusregular.ttf');
+
+} 

@@ -26,3 +26,13 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.wrapper{
+  min-height: 100%;
+  margin-bottom: -50px
+}
+
+.push{
+  height: 50px
+}
+

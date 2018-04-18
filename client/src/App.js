@@ -10,9 +10,12 @@ class App extends Component {
   render() {
   
     return (
-      <div >
-        <Header/>
-        <Wrapper/>
+      <div>
+        <div className="wrapper">
+          <Header/>
+          <Wrapper />
+          <div className="push"></div>
+        </div>
         <Footer/>
       </div>
     );

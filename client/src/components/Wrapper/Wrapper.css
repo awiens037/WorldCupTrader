@@ -1,13 +1,9 @@
-.wrapper {
-    min-height: calc(100vh - 50px);
-}
-
 .login {
-    float: right;
     width: 25%;
     height: 300px;
     margin-top: 2%;
     margin-right: 7%;
+    margin-left: 7%;
 }
 
 form {
@@ -29,7 +25,13 @@ input[type=password] {
 
 }
 
+.main{
+    display:flex;
+    min-height: 100%;
+    margin-bottom: -200px;
+    /* min-height: calc(81vh - 50px); */
 
+}
 .buttons {
     display: flex;
 
@@ -57,81 +59,26 @@ button:hover {
     opacity: 0.8;
 }
 
-
-@keyframes slide {
-    20% {
-        margin-left: 0px;
-    }
-    30% {
-        margin-left: -728px;
-    }
-    50% {
-        margin-left: -728px;
-    }
-    60% {
-        margin-left: -1456px;
-    }
-    70% {
-        margin-left: -1456px;
-    }
-    80% {
-        margin-left: -2184px;
-    }
-    90% {
-        margin-left: -2184px;
-    }
-}
-
-/* Start Caroussel CSS */
-
-#slideshow {
+.slideshow {
+    position: relative;
     overflow: hidden;
-    width: 65%;
-    float: left;
-    height: 60%;
-    margin-left: 2%;
-    margin-top: 2%;
-}
+    height: 233px;
+    width: 70%;
+    margin-top: 5%;
+    margin-left: 7%;
 
-.slide-wrapper {
-    -webkit-animation: slide 18s ease infinite;
-    text-align: center;
-    font-size: 1.5em;
-    line-height: 1.1em;
-    font-family: 'Playfair Display', serif;
-    font-weight: 200;
-    font-style: italic;
-    color: #fff1a3;
-}
+  }
+  .images {
+    background: url("/images/carousel.jpg");
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 300%;
+    animation: slideshow 25s linear infinite;
+  }
+  @keyframes slideshow {
+    0%    { left: 0; }
+    100%  { left: -200%; }
+  }
 
-.slide {
-    float: left;
-    height: 510px;
-    width: 728px;
-    background-position: center;
-    background-size: contain;
-}
-
-.slide:nth-child(1) {
-    background: url("/images/image1.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.slide:nth-child(2) {
-    background: url("/images/image2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.slide:nth-child(3) {
-    background: url("/images/image3.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.slide:nth-child(4) {
-    background: url("/images/image4.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-}

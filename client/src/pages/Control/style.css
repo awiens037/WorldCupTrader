@@ -1,0 +1,27 @@
+
+.wrapper {
+    min-height: calc(100vh - 100px);
+}
+
+.forms {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 3%;
+    /* width: 80%; */
+}
+
+form{
+    flex:3;
+}
+
+textarea {
+    display: block;
+    padding: 20%;
+    /* background-color: lightblue; */
+    opacity: .7;
+}
+
+label {
+    font-size: 20px;
+    margin-bottom: 20px;
+}

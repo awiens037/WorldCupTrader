@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import "./Wrapper.css";
 
-class Wrapper extends Component {
-
-
-    render(){
+const Wrapper = props => {
         return (
             <div>
 <div className='main'>
@@ -19,20 +16,20 @@ class Wrapper extends Component {
             <label htmlFor="uname">
                 <b>E-Mail</b>
             </label>
-            <input type="text" placeholder="Enter your E-mail" name="uname" required/>
+            <input type="text" placeholder="Enter your E-mail" name="email" onChange={props.handleInputChange} value={props.email} required/>
 
-            <label htmlFor="psw">
+            <label htmlFor="email">
                 <b>Screen Name</b>
             </label>
-            <input type="text" placeholder="Enter Screen Name" name="psw" required/>
-            <label htmlFor="psw">
+            <input type="text" placeholder="Enter Screen Name" name="username" onChange={props.handleInputChange} value={props.username} required/>
+            <label htmlFor="username">
                 <b>Password</b>
             </label>
-            <input type="password" placeholder="Enter Password" name="psw" required/>
+            <input type="password" placeholder="Enter Password" name="password" onChange={props.handleInputChange} value={props.password} required/>
 
             <div className="buttons">
-                <button type="submit">Create account</button>
-                <button type="submit">Login</button>
+                <button type="submit" onClick={props.handleRegister}>Create account</button>
+                <button type="submit" onClick={props.handleLogin}>Login</button>
             </div>
 
 
@@ -43,7 +40,7 @@ class Wrapper extends Component {
     </div>
             </div>
         )
-    }
+
 };
 
 // const Wrapper = props => (

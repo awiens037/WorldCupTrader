@@ -2,13 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    screenName: String,
+    username: String,
     email: String,
     password: String,
-    authKey: String, 
     has: [Number],
-    needs: [Number],
+    needs: [Number]
 });
+
+userSchema.methods.validPassword = function(pwd) {
+	console.log("pwd: " + pwd + ' & password: ' + this.password);
+	return (this.password === pwd)
+}
 
 // This creates our model from the above schema, using mongoose's model method
 var User = mongoose.model("User", userSchema);

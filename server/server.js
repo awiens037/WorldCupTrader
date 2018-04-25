@@ -24,7 +24,7 @@ app.use(passport.initialize());
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/Trader", {
+mongoose.connect("mongodb://localhost/Traders", {
 	useMongoClient: true
 });
 

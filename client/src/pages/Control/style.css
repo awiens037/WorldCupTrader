@@ -25,3 +25,7 @@ label {
     font-size: 20px;
     margin-bottom: 20px;
 }
+
+#nameButton {
+    background-color: #e7b21c;
+}

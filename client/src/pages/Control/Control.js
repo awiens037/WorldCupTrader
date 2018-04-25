@@ -26,7 +26,7 @@ class Control extends Component {
 
     renderTraders = () => {
         return this.state.users.map(user => (
-            <p key={user._id}>{user.username}</p>
+            <button id="nameButton" key={user._id}>{user.username}</button>
         ))
     }
 
@@ -48,7 +48,6 @@ class Control extends Component {
                 <label htmlFor="message">Their Needs</label>
                 <br/>
                 <textarea id="message" name="message" required="required"></textarea>
-                <button type="submit">Submit</button>
             </form>
 
             <form id="traders-list">
@@ -57,7 +56,6 @@ class Control extends Component {
                 <div className="block" id="message" name="message" required="required" >
                     {this.renderTraders()}
                 </div>
-                <button type="submit">Submit</button>
             </form>
         </div>
         
@@ -73,7 +71,6 @@ class Control extends Component {
                 <label htmlFor="message">They Have</label>
                 <br/>
                 <textarea id="message" name="message" required="required"></textarea>
-                <button type="submit">Submit</button>
             </form>
 
             <form id="socket-goes-here">

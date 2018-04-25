@@ -17,9 +17,18 @@ class Home extends Component {
     renderContent() {
         // check if logged in
         if (this.state.isLoggedIn) {
-            return <Redirect to="/control" />
+            return <Redirect to={{ 
+              pathname: "/control",
+              state: {username: this.state.username}
+              }}
+            />
         } 
-        return <Wrapper handleRegister={this.handleRegister} handleInputChange={this.handleInputChange} email={this.state.email} password={this.state.password} username={this.state.username} />
+        return <Wrapper 
+          handleRegister={this.handleRegister} 
+          handleInputChange={this.handleInputChange} 
+          email={this.state.email} 
+          password={this.state.password} 
+          username={this.state.username} />
     };
 
     handleInputChange = event => {
@@ -38,6 +47,7 @@ class Home extends Component {
           password: this.state.password
         });
         this.setState({ isLoggedIn: true })
+        localStorage.setItem('Username', this.state.username);
       };
     };
 
@@ -50,6 +60,7 @@ class Home extends Component {
           password: this.state.password
         });
         this.setState({ isLoggedIn: true })
+        localStorage.setItem('Username', this.state.username);
       };
     };
 

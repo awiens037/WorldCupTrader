@@ -17,6 +17,7 @@ class Control extends Component {
     componentDidMount() {
         API.usersList()
             .then(result => {
+                console.log(result)
                 // debugger
                 this.setState({ users: result.data })
             })

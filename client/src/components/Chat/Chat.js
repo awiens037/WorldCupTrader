@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './Chat.css'; 
+import './Chat.css'; 
 import openSocket from 'socket.io-client';
 
 class Chat extends Component {
@@ -16,37 +16,34 @@ class Chat extends Component {
 
 		// console.log('test')
 
-		const socket = openSocket('localhost:5000');
+		const socket = openSocket('localhost:3001');
 
 		this.socket = socket;
 
 		//listener to append new messages to be rendered
 		socket.on('message', (msg) => {
-			console.log('message recieved from ' + msg.name)
+			console.log('message recieved from ' + msg.username)
 	    	this.setState({
 	    		messages: [...this.state.messages, msg],
-	    		username: '',
-				message: ''
 	    	})
 	 	});
 
 	};
 
-	handleSubmit = () => {
-
+	handleSubmit = event => {
+		event.preventDefault()
 		const msgToSend = {
-			name: this.state.username,
 			message: this.state.message,
+			username: this.state.username
 		}
 
 		this.setState({
     		messages: [...this.state.messages, msgToSend],
-    		username: '',
 			message: ''
     	})
 
 
-		console.log('emmitting message from ' + msgToSend.name)
+		console.log('emmitting message from ' + msgToSend.username)
 
 	    this.socket.emit('message', msgToSend)
 
@@ -61,8 +58,14 @@ class Chat extends Component {
 		})
 	}
 
+	componentWillMount() {
+		this.setState({
+			username: localStorage.getItem('Username')
+		})
+	}
 
 	render() {
+
         return (
             <div className="container">
                 <div className="row">
@@ -73,19 +76,25 @@ class Chat extends Component {
                                 <hr/>
                                 <div className="messages">
 								    {this.state.messages.map(message => {
+										let nameClass
+										if (this.state.username === message.username) {
+											nameClass = 'msgSelf'
+										} else {
+											nameClass = 'msgOther'
+										}
 								        return (
-								            <div key={message.index}><b>{message.name}</b>: {message.message}</div>
+								            <div key={message.index} className={nameClass}><b>{message.username}</b>: {message.message}</div>
 								        )
 								    })}                                	
                                 </div>
                                 <div className="footer">
-                                    <input 
+                                    {/* <input 
 	                                    type="text" 
 	                                    name="username" 
 	                                    placeholder="Username" 
 	                                    value={this.state.username} 
 	                                    onChange={this.handleInputChange} 
-	                                    className="form-control"/>
+	                                    className="form-control"/> */}
                                     <br/>
                                     <input 
                                     	type="text" 
@@ -96,7 +105,7 @@ class Chat extends Component {
 							            onChange={this.handleInputChange}
                                     	onKeyPress={event => {
 							                if (event.key === 'Enter') {
-							                  this.handleSubmit()
+							                  this.handleSubmit(event)
 							            	}}}
 							            	/>
                                     <br/>

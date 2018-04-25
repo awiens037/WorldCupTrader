@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import './style.css';
+import API from '../../utils/API'
 
 
 class Control extends Component {
@@ -14,6 +15,25 @@ class Control extends Component {
     //     } 
     //     return <Wrapper />
     // }
+
+    state = {
+        users: []
+    }
+
+    componentDidMount() {
+        API.usersList()
+            .then(result => {
+                // debugger
+                this.setState({ users: result.data })
+            })
+            .catch(err => alert(err))
+    }
+
+    renderTraders = () => {
+        return this.state.users.map(user => (
+            <p key={user._id}>{user.username}</p>
+        ))
+    }
 
 
     render() {
@@ -42,7 +62,9 @@ class Control extends Component {
             <form id="traders-list">
                 <label htmlFor="message">Trader's List</label>
                 <br/>
-                <textarea id="message" name="message" required="required"></textarea>
+                <div className="block" id="message" name="message" required="required" >
+                    {this.renderTraders()}
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </div>

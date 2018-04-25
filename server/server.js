@@ -195,6 +195,22 @@ app.post('/login', function(req, res) {
 //                                    failureRedirect: '/login' }));
 
 
+
+app.get('/usersList', function(req, res) {
+    User.find({},function(err, users) {
+        if (err) return res.send(err);
+        var userMap = {};
+  
+      users.forEach(function(user) {
+        userMap[users._id] = user;
+      });
+  
+      res.send(users);  
+    });
+  });
+
+
+  
 // Start the API server
 app.listen(PORT, function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);

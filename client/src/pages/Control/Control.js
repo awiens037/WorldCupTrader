@@ -2,27 +2,22 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Chat from "../../components/Chat"
 import './style.css';
-import API from '../../utils/API'
+import API from '../../utils/API';
+
 
 
 class Control extends Component {
-
-    // renderContent() {
-    //     // check if logged in
-    //     if (false) {
-    //         return <Redirect to="/control" />
-    //     } 
-    //     return <Wrapper />
-    // }
-
     state = {
         users: []
     }
 
+
     componentDidMount() {
         API.usersList()
             .then(result => {
+                console.log(result)
                 // debugger
                 this.setState({ users: result.data })
             })
@@ -35,11 +30,8 @@ class Control extends Component {
         ))
     }
 
-
     render() {
 
-     
-    
       return (
         <div>
             <Header/>
@@ -87,8 +79,7 @@ class Control extends Component {
             <form id="socket-goes-here">
                 <label htmlFor="message">Socket Goes Here</label>
                 <br/>
-                <textarea id="message" name="message" required="required"></textarea>
-                <button type="submit">Submit</button>
+                <Chat username={this.props.username} />
             </form>
         </div>
     </div>

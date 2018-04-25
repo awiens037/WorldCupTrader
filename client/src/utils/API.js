@@ -12,6 +12,8 @@ const API = {
 	usersList: function (){
 		return axios.get('/usersList')
 	}
+
+	
 }
 
 export default API;

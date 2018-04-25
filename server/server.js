@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
 // Requiring the `User` model for accessing the `users` collection
 var User = require("./models/user.js");
 
@@ -24,28 +25,11 @@ app.use(passport.initialize());
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/Trader", {
+mongoose.connect("mongodb://localhost/Traders", {
 	useMongoClient: true
 });
 
-// Establish the connection
-const io = require('socket.io')();
 
-io.on('connection', (client) => {
-	// console.log(client.id);
-	// client.emit('test')
-
-
-	client.on('message', (data) => {
-		console.log('message broadcasted from ' + data.name)
-		client.broadcast.emit('message', data)
-	})
-	
-})
-
-// Set the socket up to listen on a unique PORT and start running it
-const IOPORT = 5000;
-io.listen(IOPORT)
 	
 
 // Configure body parser for AJAX requests
@@ -190,10 +174,42 @@ app.post('/login', function(req, res) {
   })(req, res);
 });
 
+app.get('/usersList', function(req, res) {
+    User.find({},function(err, users) {
+        if (err) return res.send(err);
+        var userMap = {};
+  
+      users.forEach(function(user) {
+        userMap[users._id] = user;
+      });
+  
+      res.send(users);  
+    });
+  });
+
 // app.post('/login',
 //   passport.authenticate('local', { successRedirect: '/',
 //                                    failureRedirect: '/login' }));
 
+const server = app.listen(PORT)
+
+// Establish the connection
+const io = require('socket.io').listen(server);
+
+io.on('connection', (client) => {
+	console.log('CONNECTED WOOOOOOOOOOOOOO');
+    // client.emit('test')
+
+
+	client.on('message', (data) => {
+		console.log('message broadcasted from ' + data.username)
+		client.broadcast.emit('message', data)
+	})
+	
+})
+
+// Set the socket up to listen on a unique PORT and start running it
+// const IOPORT = 5000;
 
 
 app.get('/usersList', function(req, res) {
@@ -212,9 +228,11 @@ app.get('/usersList', function(req, res) {
 
   
 // Start the API server
-app.listen(PORT, function () {
-    console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+
+// app.listen(PORT, function () {
+//     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+// });
+
 
 
 // console.log('IO Listening on port ' + IOPORT)

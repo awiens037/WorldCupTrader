@@ -174,18 +174,39 @@ app.post('/login', function(req, res) {
   })(req, res);
 });
 
-app.get('/usersList', function(req, res) {
+app.get('/usersList/', function(req, res) {
     User.find({},function(err, users) {
         if (err) return res.send(err);
-        var userMap = {};
+       var userMap = {};
   
       users.forEach(function(user) {
-        userMap[users._id] = user;
-      });
-  
+       userMap[users._id] = user;
+    });
       res.send(users);  
     });
   });
+
+app.get('/userHas/:username', function(req, res) {
+    User.find({username: req.params.username }, function(err, users) {
+        console.log(users[0].has)
+        res.send(users[0].has)
+    });
+});
+
+app.get('/userNeeds/:username', function(req, res) {
+    User.find({username: req.params.username}, function(err, users) {
+        res.send(users[0].needs)
+    });
+
+});
+
+app.post('/updateUser', function(req, res) {
+    console.log(req.params)
+    User.findOneAndUpdate(
+        {username: req.params.username}, 
+        {$set: {[req.params.option]: req.params.data}}
+    )
+})
 
 // app.post('/login',
 //   passport.authenticate('local', { successRedirect: '/',

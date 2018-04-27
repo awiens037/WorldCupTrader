@@ -25,6 +25,7 @@ class Home extends Component {
         } 
         return <Wrapper 
           handleRegister={this.handleRegister} 
+          handleLogin={this.handleLogin}
           handleInputChange={this.handleInputChange} 
           email={this.state.email} 
           password={this.state.password} 

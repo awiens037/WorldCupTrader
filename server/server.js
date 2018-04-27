@@ -10,6 +10,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
 
 // Requiring the `User` model for accessing the `users` collection
 var User = require("./models/user.js");

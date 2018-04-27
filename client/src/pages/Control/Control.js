@@ -85,13 +85,16 @@ class Control extends Component {
             });
 
         } else if (option === 'Has') {
-            const uHas = this.state.uHas;
-            API.updateUser({
-                has: [...this.state.uHas, uHas]
-            });
+            const Has = parseInt(this.state.uHas);
             this.setState({
+                userHas: [...this.state.userHas, Has],
                 uHas: ''
-            })
+            });
+            API.updateUser({
+                username: localStorage.getItem('Username'),
+                key: 'has',
+                value: [...this.state.userHas, Has],
+            });
         }
     }
 
@@ -118,7 +121,7 @@ class Control extends Component {
                 <input name="uNeeds" onChange={this.handleInputChange} value={this.state.uNeeds}/>
                 <button type="submit" 
                 onClick={(e)=>{
-                    e.preventDefault()
+                    e.preventDefault(),
                     this.handleUpdate('Needs')
                 }}>Submit</button>
                 </form>
@@ -149,7 +152,11 @@ class Control extends Component {
                     <li>{card}</li>
                 ))}</ul>
                 <input />
-                <button type="submit" onClick= {(e)=>(e.preventDefault(), this.handleUpdate())}>Submit</button>
+                <button type="submit" 
+                onClick= {(e)=>(
+                    e.preventDefault(),
+                    this.handleUpdate('Has')
+                )}>Submit</button>
             </form>
             
             <form id="they-have-form">

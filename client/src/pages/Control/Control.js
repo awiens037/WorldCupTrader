@@ -79,7 +79,7 @@ class Control extends Component {
                 uNeeds: ''
             });
             API.updateUser({
-                needs: [this.state.userNeed + Needs],
+                needs: [this.state.userNeed, Needs],
             });
 
         } else if (option === 'Has') {

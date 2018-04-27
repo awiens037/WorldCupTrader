@@ -114,8 +114,6 @@ app.post('/register', function(req, res) {
                 user.email =     req.body.email;
                 user.password =  req.body.password;
                 user.username =  req.body.username;
-                //user.gcmId = req.body.gcmId;
-                //user.source = req.body.source;
                 user.save(function(err) {
                     if (err) {
                         res.json({
@@ -201,12 +199,14 @@ app.get('/userNeeds/:username', function(req, res) {
 });
 
 app.post('/updateUser', function(req, res) {
-    console.log(req.params)
+    console.log('key: ' + req.body.key)
+    console.log('value: ' + req.body.value)
+    console.log('username: ' + req.body.username)
     User.findOneAndUpdate(
-        {username: req.params.username}, 
-        {$set: {[req.params.option]: req.params.data}}
-    )
-})
+        {username: req.body.username},
+        {[req.body.key]: req.body.value}
+    );
+});
 
 // app.post('/login',
 //   passport.authenticate('local', { successRedirect: '/',

@@ -73,13 +73,15 @@ class Control extends Component {
         if (option === 'Needs') {
         //event.preventDefault();
 
-            const Needs = this.state.uNeeds;
+            const Needs = parseInt(this.state.uNeeds);
             this.setState({
                 userNeeds: [...this.state.userNeeds, Needs],
                 uNeeds: ''
             });
             API.updateUser({
-                needs: [this.state.userNeed, Needs],
+                username: localStorage.getItem('Username'),
+                key: 'needs',
+                value: [...this.state.userNeeds, Needs],
             });
 
         } else if (option === 'Has') {

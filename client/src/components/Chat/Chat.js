@@ -83,7 +83,7 @@ class Chat extends Component {
 											nameClass = 'msgOther'
 										}
 								        return (
-								            <div key={message.index} className={nameClass}><b>{message.username}</b>: {message.message}</div>
+								            <div key={message.index} ><b className={nameClass}>{message.username}</b>: {message.message}</div>
 								        )
 								    })}                                	
                                 </div>

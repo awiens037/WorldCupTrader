@@ -161,8 +161,6 @@ class Control extends Component {
             </form>
 
             <form id="socket-goes-here">
-                <label htmlFor="message">Socket Goes Here</label>
-                <br/>
                 <Chat username={this.props.username} />
             </form>
         </div>

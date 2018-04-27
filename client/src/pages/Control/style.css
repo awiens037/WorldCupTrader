@@ -22,10 +22,40 @@ textarea, .block {
 }
 
 label {
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 20px;
+    font-family: "dusha_plusregular";
 }
 
 #nameButton {
     background-color: #e7b21c;
+}
+
+.block {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    margin-top: 15%;
+}
+
+p {
+    font-weight: bold;
+    color: red;
+    /* text-shadow: 1px 2px 3px blue; */
+    cursor: pointer;
+    text-decoration: underline red;
+}
+
+p:hover {
+    font-size: 20px;
+}
+
+h1 {
+    text-shadow: 2px 3px 4px black;
+}
+
+h6 {
+    text-shadow: 2px 3px 4px black;
 }

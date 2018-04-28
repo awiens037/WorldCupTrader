@@ -8,7 +8,7 @@
         "server": "cd server && npm start",
         "start": "concurrently \"nodemon server\" \"npm run client\"",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "installDeps": "yarn && cd client && yarn",
+        "installDeps": "npm && cd client && npm",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"    
     },

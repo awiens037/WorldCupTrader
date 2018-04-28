@@ -8,7 +8,9 @@
         "server": "cd server && npm start",
         "start": "concurrently \"nodemon server\" \"npm run client\"",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "installDeps": "cd  server && npm install && cd ../client && npm install",
+        "installClientDeps": "cd client && npm install",
+        "installServerDeps": "cd server && npm install",
+        "installDeps": "npm run installClientDeps && npm run installServerDeps",
         "predeploy": "npm run build"
     },
     "author": "",

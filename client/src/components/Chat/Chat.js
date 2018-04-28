@@ -69,10 +69,10 @@ class Chat extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12">
                         <div className="card">
-                            <div className="card-body">
-                                <div className="card-title">Global Chat</div>
+                            <div className="card-body" id="card-body">
+                                <div className="card-title" id="card-title">Trade Chat</div>
                                 <hr/>
                                 <div className="messages">
 								    {this.state.messages.map(message => {
@@ -83,7 +83,7 @@ class Chat extends Component {
 											nameClass = 'msgOther'
 										}
 								        return (
-								            <div key={message.index} className={nameClass}><b>{message.username}</b>: {message.message}</div>
+								            <div key={message.index} ><b className={nameClass}>{message.username}</b>: {message.message}</div>
 								        )
 								    })}                                	
                                 </div>

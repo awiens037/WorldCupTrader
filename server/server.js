@@ -114,8 +114,6 @@ app.post('/register', function(req, res) {
                 user.email =     req.body.email;
                 user.password =  req.body.password;
                 user.username =  req.body.username;
-                //user.gcmId = req.body.gcmId;
-                //user.source = req.body.source;
                 user.save(function(err) {
                     if (err) {
                         res.json({
@@ -174,18 +172,41 @@ app.post('/login', function(req, res) {
   })(req, res);
 });
 
-app.get('/usersList', function(req, res) {
+app.get('/usersList/', function(req, res) {
     User.find({},function(err, users) {
         if (err) return res.send(err);
-        var userMap = {};
+       var userMap = {};
   
       users.forEach(function(user) {
-        userMap[users._id] = user;
-      });
-  
+       userMap[users._id] = user;
+    });
       res.send(users);  
     });
   });
+
+app.get('/userHas/:username', function(req, res) {
+    User.find({username: req.params.username }, function(err, users) {
+        console.log(users[0].has)
+        res.send(users[0].has)
+    });
+});
+
+app.get('/userNeeds/:username', function(req, res) {
+    User.find({username: req.params.username}, function(err, users) {
+        res.send(users[0].needs)
+    });
+
+});
+
+app.post('/updateUser', function(req, res) {
+    console.log('key: ' + req.body.key)
+    console.log('value: ' + req.body.value)
+    console.log('username: ' + req.body.username)
+    User.findOneAndUpdate(
+        {username: req.body.username},
+        {[req.body.key]: req.body.value}
+    );
+});
 
 // app.post('/login',
 //   passport.authenticate('local', { successRedirect: '/',

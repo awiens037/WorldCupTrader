@@ -197,7 +197,9 @@ app.get('/userHas/:username', function(req, res) {
 app.get('/userNeeds/:username', function(req, res) {
     User.find({username: req.params.username}, function(err, users) {
         res.send(users[0].needs)
+        console.log(users[0])
     });
+   
 
 });
 
@@ -207,8 +209,11 @@ app.post('/updateUser', function(req, res) {
     console.log('username: ' + req.body.username)
     User.findOneAndUpdate(
         {username: req.body.username},
-        {[req.body.key]: req.body.value}
-    );
+        {[req.body.key]: req.body.value},
+    function(err, update) {
+        if (err) {return err};
+        res.send(update);
+    });
 });
 
 // app.post('/login',

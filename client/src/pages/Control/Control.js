@@ -32,7 +32,7 @@ class Control extends Component {
 
         API.userHas(localStorage.getItem('Username'))
             .then(result => {
-                console.log('User has: ' + result)
+                console.log('User has: ' + result.data)
                 this.setState({ userHas: result.data})
             });
             
@@ -86,6 +86,7 @@ class Control extends Component {
 
         } else if (option === 'Has') {
             const Has = parseInt(this.state.uHas);
+            console.log('This has: ' + Has);
             this.setState({
                 userHas: [...this.state.userHas, Has],
                 uHas: ''
@@ -151,7 +152,7 @@ class Control extends Component {
                 <ul id="message" name="message" required="required">{this.state.userHas.map(card => (
                     <li>{card}</li>
                 ))}</ul>
-                <input />
+                <input name="uHas" onChange={this.handleInputChange} value={this.state.uHas} />
                 <button type="submit" 
                 onClick= {(e)=>(
                     e.preventDefault(),

@@ -10,6 +10,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
 
 // Requiring the `User` model for accessing the `users` collection
 var User = require("./models/user.js");
@@ -194,7 +197,9 @@ app.get('/userHas/:username', function(req, res) {
 app.get('/userNeeds/:username', function(req, res) {
     User.find({username: req.params.username}, function(err, users) {
         res.send(users[0].needs)
+        console.log(users[0])
     });
+   
 
 });
 
@@ -204,8 +209,11 @@ app.post('/updateUser', function(req, res) {
     console.log('username: ' + req.body.username)
     User.findOneAndUpdate(
         {username: req.body.username},
-        {[req.body.key]: req.body.value}
-    );
+        {[req.body.key]: req.body.value},
+    function(err, update) {
+        if (err) {return err};
+        res.send(update);
+    });
 });
 
 // app.post('/login',

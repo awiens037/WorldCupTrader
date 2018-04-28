@@ -1,18 +1,24 @@
+// Foreign Dependencies
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-const config = require("./config.js");
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const routes = require("./routes");
-const app = express();
-const PORT = process.env.PORT || 3001;
+// Local Dependencies
+const config = require("./config.js");
 
+
+// Set up production build for the proper environment
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
+
+// Set up Express to listen bilatterally to the client or on whatever environment is given
+const app = express();
+const PORT = process.env.PORT || 3001;
+
 
 // Requiring the `User` model for accessing the `users` collection
 var User = require("./models/user.js");
@@ -41,28 +47,23 @@ app.use(bodyParser.json());
 // Serve up static
 app.use(express.static("../client/build"));
 
-
-// Set up promises with mongoose
-// mongoose.Promise = global.Promise;
-// // Connect to the Mongo DB
-// mongoose.connect(
-//     process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
-//     {
-//         useMongoClient: true
-//     }
-// );
-
 // Set up the strategy to accept Local authentication
 passport.use(new LocalStrategy(
+  // listening for Username and Password
   function(username, password, done) {
+    // Look for a user by username
     User.findOne({ username: username }, function(err, user) {
+      // If there is an error, kick the userback to the home page
       if (err) { return done(err); }
+      // If there is no User, return message 'Incorrect username'
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
+      // If the password is incorrect, return message 'Incorrect Password'
       if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
+      // Otherwise, return user
       return done(null, user);
     });
   }
@@ -189,7 +190,7 @@ app.get('/usersList/', function(req, res) {
 
 app.get('/userHas/:username', function(req, res) {
     User.find({username: req.params.username }, function(err, users) {
-        console.log(users[0].has)
+        console.log('this is: ' + users)
         res.send(users[0].has)
     });
 });
@@ -204,9 +205,6 @@ app.get('/userNeeds/:username', function(req, res) {
 });
 
 app.post('/updateUser', function(req, res) {
-    console.log('key: ' + req.body.key)
-    console.log('value: ' + req.body.value)
-    console.log('username: ' + req.body.username)
     User.findOneAndUpdate(
         {username: req.body.username},
         {[req.body.key]: req.body.value},
